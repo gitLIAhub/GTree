@@ -1,19 +1,18 @@
 import os, sys                          # directory
 import shutil                           # copy files
 from numpy import *
-import winsound
+#import winsound
 
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-from mpl_toolkits.mplot3d import Axes3D
-from mpl_toolkits.mplot3d import art3d
+#from mpl_toolkits.mplot3d import Axes3D
+#from mpl_toolkits.mplot3d import art3d
 
-import Image, ImageEnhance
+#import Image, ImageEnhance
 import numpy
 
 import AddPipls
-# !!!Vot blin kruto!! FckCKKnSHt!
 import imp
 imp.reload(AddPipls)
 
@@ -27,12 +26,8 @@ class AllFamily(object):
             a+=1
         self.AllId.append(a)        
         return a
-    def setGenerationLvls(self):
-        maxlvl=-500
-        for pipl in self.family:
-            pass
     def getPiplFromId(self, Id):
-        print "getPiplFromId_Id=", Id
+        #print "getPiplFromId_Id=", Id
         for pipl in self.family:
             if (pipl._Id==Id):
                 return pipl
@@ -40,11 +35,9 @@ class AllFamily(object):
         return self.family[0]
     
 def deligate(family, toPiplId, toRecLev):
-    if not(toPiplId==-1):
+    if (toPiplId!=-1):
         if ((family.getPiplFromId(toPiplId)).isGLevSet==False):
             setGenerLev(family, family.getPiplFromId(toPiplId), toRecLev)
-        else:
-            print "Else Else!!"
             
 def setGenerLev(family, self, recLev):
     self.setGLev(recLev)
@@ -54,7 +47,7 @@ def setGenerLev(family, self, recLev):
     for piplId in self.Childs:
         deligate(family, piplId, recLev-1)
     deligate(family, self.Spouse, recLev)
-    """if not(self.DadId==-1):
+    """if (self.DadId!=-1):
         if ((family.getPiplFromId(self.DadId)).isGLevSet==False):
             setGenerLev(family, family.getPiplFromId(self.DadId), recLev+1)
         else:
@@ -63,12 +56,12 @@ def setGenerLev(family, self, recLev):
     
     
 class Che(object):
-    Name, LastName, Otche = "","",""
+    Name, LastName, ThirdName = "","",""
     isGLevSet=False
     _Id=-1
     DadId=-1
     MomId=-1
-    Spouse=-1       #wedding
+    Spouse=-1       # wife/husband
     DateWedding=-1
     NChilds=0       #childs    
     GenerationLevel=-500
@@ -77,10 +70,10 @@ class Che(object):
     def setGLev(self, recLev):
         self.GenerationLevel=recLev
         
-    def __init__(self, LastNamein, Namein, Otchein, Family):
+    def __init__(self, LastNamein, Namein, ThirdNamein, Family):
         self.Name=Namein
         self.LastName=LastNamein
-        self.Otche=Otchein
+        self.ThirdName=ThirdNamein
         self._Id=Family.getNewId()
         self.Childs=[]
         Family.family.append(self)
@@ -94,7 +87,7 @@ class Che(object):
     def addChild(self, chld):
         self.NChilds+=1
         self.Childs.append(chld._Id)
-        
+
     def setDad(self, dad):
         self.DadId=dad._Id
         dad.addChild(self)
@@ -105,12 +98,11 @@ class Che(object):
         self.setMom(mom)
         self.setDad(dad)
         dad.marry(mom)
-    
-    
+
     def __str__(self):
-        return "%sId=%2.0f, %s %s %s" % (self.__EndOfRepr__,  self._Id, self.LastName, self.Name, self.Otche)
+        return "%sId=%2.0f, %s %s %s" % (self.__EndOfRepr__,  self._Id, self.LastName, self.Name, self.ThirdName)
     def __repr__(self): 
-        return "%sId=%2.0f, %s %s %s" % (self.__EndOfRepr__,  self._Id, self.LastName, self.Name, self.Otche)
+        return "%sId=%2.0f, %s %s %s" % (self.__EndOfRepr__,  self._Id, self.LastName, self.Name, self.ThirdName)
     def AllOut(self):
         maxLenOfAttr=0
         for attr in dir(self):
@@ -119,6 +111,7 @@ class Che(object):
                     maxLenOfAttr=len(attr)
         def separate(s="  "):
             print s
+
         def printList(lst, seprr="  "):
             if (type(lst)==type("abc")):
                 attr=lst
@@ -127,7 +120,8 @@ class Che(object):
                 for attr in lst:
                     print ("{:"+str(maxLenOfAttr)+"}: {}").format(attr, self.__getattribute__(attr))
             separate(seprr)
-        printList(('_Id', 'LastName', 'Name', 'Otche'))
+            
+        printList(('_Id', 'LastName', 'Name', 'ThirdName'))
         printList(('GenerationLevel', 'isGLevSet'))
         printList(('DadId', 'MomId')," - "*10)
         #printList(('Spouse', 'DateWedding'))
@@ -135,7 +129,7 @@ class Che(object):
 
     def __eq__(self, other):
         isEqual = True
-        for attr in ('LastName', 'Name', 'Otche', 'DadId', 'MomId'):
+        for attr in ('LastName', 'Name', 'ThirdName', 'DadId', 'MomId'):
             isEqual = isEqual and (self.__getattribute__(attr)==other.__getattribute__(attr))
         return isEqual
 
