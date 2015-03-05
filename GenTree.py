@@ -130,7 +130,7 @@ class Che(object):
         printList(('_Id', 'LastName', 'Name', 'Otche'))
         printList(('GenerationLevel', 'isGLevSet'))
         printList(('DadId', 'MomId')," - "*10)
-        printList(('Spouse', 'DateWedding'))
+        #printList(('Spouse', 'DateWedding'))
         printList(('NChilds', 'Childs'))
 
     def __eq__(self, other):
@@ -151,12 +151,14 @@ if __name__ == '__main__':
     PATHthisROOT=os.path.dirname(PATHthisFULL)  # name of directory of this file
     
     Lips=AllFamily()
-    PrintAll(Lips.family)
+    #PrintAll(Lips.family)
     Lips=AddPipls.Add(Lips)
+    PrintAll(Lips.family)
+    setGenerLev(Lips, Lips.family[0], 0)
     print "Lips family"
     PrintAll(Lips.family)
 
-    print "Ilya's family:", Lips.family
+    #print "Ilya's family:", Lips.family
 
 
     

@@ -45,6 +45,12 @@ def Add(piplArr):
     NatashaK=GenTree.Che("Kosheleva", "Natalyja", "Hzhzhz", piplArr)
     LeonidBrat=GenTree.Che("Koshelev", "Leonid", "Alexeevich", piplArr)
     DSlavaS=GenTree.Che("Sokolov", "Vjacheslav'", "Ivanovich", piplArr)
+    NatashaS=GenTree.Che("Sokolova", "Natalyja", "Hzhzhz", piplArr)
+    NastjaS=GenTree.Che("Sokolova", "Anastsija", "Vjacheslavovna", piplArr)
+    ToljaKud=GenTree.Che("Kudrjavcev", "Anatolyi", "Hzhzhz", piplArr)
+    SevaBrat=GenTree.Che("Kudrjavcev", "Vsevolod", "Anatoljevich", piplArr)
+    SlavaBrat=GenTree.Che("Kudrjavcev", "Svjatoslav", "Anatoljevich", piplArr)
+    PlatonBrat=GenTree.Che("Kudrjavcev", "Platon", "Anatoljevich", piplArr)
     #=GenTree.Che("", "", "", piplArr)
 
     #Ilya.AllOut()
@@ -65,6 +71,10 @@ def Add(piplArr):
     DSlavaS.setParents(IvanPra, KlavaPra)
     LeshaK.setParents(DLenjaK, ZinaS)
     LeonidBrat.setParents(LeshaK, NatashaK)
+    NastjaS.setParents(DSlavaS, NatashaS)
+    SevaBrat.setParents(ToljaKud, NastjaS)
+    SlavaBrat.setParents(ToljaKud, NastjaS)
+    PlatonBrat.setParents(ToljaKud, NastjaS)
     # setParents(, )
         
     SergLips.marry(Sveta, 1989)
@@ -74,6 +84,8 @@ def Add(piplArr):
     SergBar.marry(Lena, 2004)
     DLenjaK.marry(ZinaS)
     LeshaK.marry(NatashaK)
+    DSlavaS.marry(NatashaS)
+    ToljaKud.marry(NastjaS)
     #.marry()
 
     return piplArr
